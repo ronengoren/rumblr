@@ -1,0 +1,15 @@
+<% @posts.each do |post| %>
+
+<h1><%= post.title %></h1>
+<p><%= post.content %></p>
+<% post.tags.each do |tag| %>
+
+<p><%= tag.name %></p>
+<% end %>
+<a href="/posts/<%= post.id %>/edit">edit/delete post</a>
+<p><%= post.created_at %></p>
+
+<% end %>
+
+
+<br>

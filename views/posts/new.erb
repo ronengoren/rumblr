@@ -1,0 +1,12 @@
+<h2>Create Post:</h2>
+
+<form method="POST" action="/posts/new">
+<label for="title">Title: </label><br>
+<input type="text" id="title" name="post[title]"><br><br>
+<label for="content">Post: </label><br>
+<textarea id="content" name="post[content]" style="width:350px;height:150px;"></textarea>
+<h3>Tags:</h3>
+<label for="new_tag">New Tag: </label>
+<input type="text" name="tag[name]"><br><br>
+<input type="submit" value="Create Post">
+</form>

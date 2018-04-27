@@ -1,0 +1,15 @@
+
+
+<form method="POST" action="/posts/<%= @editpost.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <input type="text" name="title" value="<%= @editpost.title %>">
+  <input type="text" name="content" value="<%= @editpost.content %>">
+  <input type="text" name="tag[name]" value="">
+
+  <button type="submit" >edit</button>
+</form>
+
+<form method="POST" action="/posts/<%= @editpost.id %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <button value="delete" type="submit" >delete</button>
+</form>
