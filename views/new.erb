@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="hero-unit">
+    <h1 class="lead">Create Post:</h1>
+  </div>
+  <div class="row span5">
+    <div>
+    <form method="POST" action="/new">
+    <label class="lead" for="title">Title: </label><br>
+    <input class="span12" type="text" id="title" name="post[title]"><br><br>
+    <label class="lead" for="content">Post: </label><br>
+    <textarea class="span12" rows="10" id="content" name="post[content]"></textarea>
+
+    <label class="lead" for="new_tag">Add Tags: </label>
+    <input class="span12 lead" type="text" name="tag[name]" id="tag_name"><br><br>
+    <input class="btn btn-primary btn-large lead" type="submit" value="Create Post">
+
+    </form>
+</div>
+  </div>
+
+</div>

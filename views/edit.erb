@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="hero-unit">
+
+<form method="POST" action="/profile/<%= @user.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <input class="lead" type="text" name="user_name" value="<%= @user.user_name %>">
+  <input class="lead" type="text" name="email" value="<%= @user.email %>">
+  <input class="lead" type="text" name="first_name" value="<%= @user.first_name %>">
+  <input class="lead" type="text" name="last_name" value="<%= @user.last_name %>">
+  <input class="lead" type="text" name="password" value="<%= @user.password %>">
+  <input class="lead" type="text" name="birthday" value="<%= @user.birthday %>">
+<br>
+  <button class="btn btn-primary btn-large lead" type="submit" >edit</button>
+</form>
+
+<form method="POST" action="/profile/<%= @user.id %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-primary btn-large lead" type="submit" >delete</button>
+</form>
+</div>
+</div>

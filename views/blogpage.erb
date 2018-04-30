@@ -1,0 +1,29 @@
+<div class="container">
+  <% @posts.each do |post| %>
+
+  <div class="hero-unit">
+    <h1 class="lead"> <%= post.title %></h1>
+    <br>
+    <p id="<%= post.id %>"><%= post.content %></p>
+<br>
+<% if !user_exists? %>
+<a class="btn btn-primary btn-large" href="/signup">Sign Up</a> OR <a class="btn btn-primary btn-large" href="/login">Log In</a></p></small>
+<% else %>
+  <p><a class="btn btn-primary btn-large" href="/posts/<%= post.id %>/edit" >edit/delete post</a></p>
+
+    <% end %>
+
+<p class="offset7"><%= post.created_at %></p>
+
+<p><% post.tags.each do |tag| %></p>
+<p>TAGS: <%= tag.name %></p>
+<p><% end %></p>
+  </div>
+
+  <% end %>
+
+
+
+
+
+</div>

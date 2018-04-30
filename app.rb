@@ -5,6 +5,7 @@ require_relative './models/taggedpost'
 require_relative './models/tag'
 require_relative './models/post'
 
+
 set :database, {adapter: 'postgresql', database: 'rumblr', username: 'postgres', password: 'ronen1983'}
 enable :sessions
 #Be aware there is the issue with sessions and shotgun/reloader, since they reload our app everytime
@@ -14,25 +15,45 @@ get '/' do
     erb :index
 end
 
-get '/users/home' do
-  erb :'/users/home'
+
+get '/signup' do
+    erb :signup
 end
 
-
-get '/registrations/signup' do
-    erb :'/registrations/signup'
-end
-
-get '/sessions/login' do
-    erb :'/sessions/login'
+get '/login' do
+    erb :login
 end
 
 get '/profile/:id' do
   @user = User.find(session[:id])
+
     erb :profile
 end
 
+put '/profile/:id' do
+@user = User.find(params[:id])
+@user.update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password], birthday: params[:birthday], user_name: params[:user_name])
+  redirect "/profile/:id"
+end
 
+get '/search' do
+  @search = Post.all.order("asc")
+  if params[:search]
+    @search = Post.search(params[:search])
+else
+  @search = Post.all
+end
+erb :search
+end
+
+post '/search/:name' do
+  @search = Post.where(content: params[:content])
+  redirect "/search"
+end
+
+get '/searchresults' do
+erb :searchlink
+end
 
 get '/logout' do
     #Clear all sessions
@@ -41,16 +62,13 @@ get '/logout' do
     redirect '/'
 end
 
-post '/sessions/login' do
+post '/login' do
     @user = User.find_by(user_name: params[:user_name], password: params[:password])
     if @user != nil
         session[:id] = @user.id
-        redirect "/profile/#{:id}"
-
-
+        redirect "/"
     else
-
-      erb :'/registrations/signup',  locals: {message: "Invalid user or password. Please try again."}
+      erb :signup
         #Could not find this user. Redirecting them to the signup page
     end
 end
@@ -58,7 +76,7 @@ end
 
 
 
-  post '/registrations/signup' do
+  post '/signup' do
     #Creating a new user based on the values from the form
     @newuser = User.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password], birthday: params[:birthday], user_name: params[:user_name])
     #Setting the session with key of ID to be equal to the users id
@@ -70,13 +88,13 @@ end
 
 get '/profile/:id/edit' do
   @user = User.find(params[:id])
-  erb :'/users/edit'
+  erb :edit
 end
 
 put '/profile/:id' do
 @user = User.find(params[:id])
 @user.update(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], password: params[:password], birthday: params[:birthday], user_name: params[:user_name])
-  redirect "/profile/:id"
+  redirect "/"
 end
 
 delete '/profile/:id' do
@@ -85,32 +103,38 @@ redirect '/'
 end
 
 
-
-
-get '/users/blogpage' do
+get '/blogpage' do
   @posts = Post.all
 
-  erb :'/users/blogpage'
+  erb :blogpage
 end
 
-get '/posts/new' do
-  erb :'/posts/new'
+get '/new' do
+  if user_exists?
+  @tags = Tag.all
+  erb :new
+else
+  redirect "/login"
+end
 end
 
 
-post '/posts/new' do
+post '/new' do
   #Creating a new user based on the values from the form
   @newpost = Post.new(params[:post])
+  params[:post][:user_id] = current_user
   @newpost.user_id = current_user.id
   @newpost.save
   @newpost.tags.create(name: params[:tag][:name])
-
-  redirect "/users/blogpage"
+  if !params[:tag][:name].empty?
+  @newpost = Tag.new(name: params[:tag][:name])
+  end
+  redirect "/blogpage"
 end
 
 get '/posts/:id/edit' do
   @editpost = Post.find(params[:id])
-  erb :'/posts/edit'
+  erb :editpost
 end
 
 put '/posts/:id' do
@@ -119,21 +143,28 @@ put '/posts/:id' do
 @editpost.tags.update(name: params[:tag][:name])
 
 
-  redirect "/users/blogpage"
+  redirect "/blogpage"
 end
 
 delete '/posts/:id' do
 Post.destroy(params[:id])
-redirect '/users/blogpage'
+redirect '/blogpage'
 end
 
 
-private
-#Potentially useful function instead of checking if the user exists
-def user_exists?
-    (session[:id] != nil) ? true : false
-end
 
-def current_user
-    User.find(session[:id])
-end
+  private
+
+  helpers do
+      def user_exists?
+          (session[:id] != nil) ? true : false
+      end
+
+      def current_user
+          User.find(session[:id])
+      end
+
+      def current_user_id
+          session[:id]
+      end
+  end

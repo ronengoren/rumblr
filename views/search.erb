@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="hero-unit">
+    <% if @search.empty? %>
+
+ <p>There are no posts for: <%= params[:search] %> :(</p>
+ <% end %>
+<% if @search.present? %>
+<p class="lead">Search Results:</p>
+<br>
+<% @search.each do |tags| %>
+<h1 class="lead"><%=tags.title %></h1>
+ <br>
+<p>  <%= tags.content %></p>
+ <br>
+ <% if !user_exists? %>
+ <a class="btn btn-primary btn-large" href="/signup">Sign Up</a> OR <a class="btn btn-primary btn-large" href="/login">Log In</a></p></small>
+ <% else %>
+ <p><a class="btn btn-primary btn-large" href="/posts/<%= tags.id %>/edit" >edit/delete post</a></p>
+ <% end %>
+ <p class="offset7"><%= tags.created_at %></p>
+ <br>
+ <% end %>
+ <% end %>
+   </div>
+   <br>
+ </div>
+ <br>

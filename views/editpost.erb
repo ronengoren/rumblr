@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="hero-unit">
+
+<form method="POST" action="/posts/<%= @editpost.id %>">
+  <input type="hidden" name="_method" value="PUT">
+  <input class="span10 lead" type="text" name="title" value="<%= @editpost.title %>">
+  <input class="span10 lead" rows="10" type="text" name="content" value="<%= @editpost.content %>">
+  <input class="lead" type="text" name="tag[name]" value="TAGS">
+<br>
+  <button class="btn btn-primary btn-large lead" type="submit" >edit</button>
+
+</form>
+
+<form method="POST" action="/posts/<%= @editpost.id %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <button class="btn btn-primary btn-large lead" value="delete" type="submit" >delete</button>
+</form>
+
+</div>
+</div>
