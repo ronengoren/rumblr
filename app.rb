@@ -6,7 +6,7 @@ require_relative './models/tag'
 require_relative './models/post'
 
 
-set :database, {adapter: 'postgresql', database: 'rumblr', username: 'postgres', password: 'ronen1983'}
+# set :database, {adapter: 'postgresql', database: 'rumblr', username: 'postgres', password: 'ronen1983'}
 enable :sessions
 #Be aware there is the issue with sessions and shotgun/reloader, since they reload our app everytime
 #Apparently doing something like : set :session_secret, "password_security" fixs it?

@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: rumblr #or whatever your db is called
+
+  production:
+  adapter: postgresql
+  host: <%= ENV['postgres://bkfjblrpowtwop:7fe19ef3da52a5787a954956e6ddd1ca1e46119451e5c05b7e4e684ff4efacd9@ec2-107-21-103-146.compute-1.amazonaws.com:5432/dahioc6701egj5'] %> #This is an env variable that Heroku creates for us. Can be found in your settings config vars
