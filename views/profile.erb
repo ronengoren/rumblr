@@ -1,24 +1,14 @@
-<div class="container offset7">
+<div class="container">
   <div class="hero-unit">
 
-    <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="">
-      <p>Here is your profile</p>
-<h3 class="lead"> <%= @user.user_name %>:</h3>
+    <h2 class="lead">Here is your profile: <%= @user.user_name %>:</h2>
 
-      <h5 class="lead">First Name: <%= @user.first_name %></h5>
-      <h5 class="lead">Last Name: <%= @user.last_name %></h5>
-      <h5 class="lead">Birthday: <%= @user.birthday %></h5>
-      <h5 class="lead">Email: <%= @user.email %></h5>
-    </div>
-    <a class="lead" href="/logout">Log Out</a>
-
-
-
-<h2></h2>
-<a href="/profile/<%= @user.id %>/edit">Edit/Delete Profile</a>
-<a href="/new">Create Post!</a>
-<a href="/blogpage">Go to see some posts!</a>
-
+      <p class="lead">First Name: <%= @user.first_name %></p>
+      <p class="lead">Last Name: <%= @user.last_name %></p>
+      <p class="lead">Birthday: <%= @user.birthday %></p>
+      <p class="lead">Email: <%= @user.email %></p>
+      <a href="/logout" class="btn btn-primary btn-large lead">Log Out</a>
+      <a href="/new" class="btn btn-primary btn-large lead">Create Post!</a>
+      <a href="/blogpage" class="btn btn-primary btn-large lead">Go to see some posts!</a>
 </div>
 </div>

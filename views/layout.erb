@@ -9,42 +9,45 @@
     <link href="/css/style.css" rel="stylesheet" media="screen">
   </head>
   <body>
-    <div class="container ">
-      <div class="row">
-        <br>
-        <a href="/"> <img href="/" class="span1" src="/images/logo1.jpg" alt=""></a>
-        <p class="divider"></p>
-        <div class="offset5">
+    <div class="container">
 
-        <p class="offset0">.............</p>
-        <p href="/" class="lead">TAG'T</p>
-      </div>
-<div >
+    <div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+<br><a href="/"><img  class="brand" src="/images/logo1.jpg" alt="" style="height:80px;"></a>
+ <br><a class="brand lead" href="/">TAG'T</a>
+    <ul class="nav lead">
+      <% if !user_exists? %><br>
+      <li><form class="form-inline" method="POST" action="/login"></li>
+      <li><input class="input-small lead" type="text" id="user_name" name="user_name" placeholder="User Name"></li>
+      <li><input  class="input-small lead" type="password" id="password" name="password" placeholder="Password"></li>
+      <li><button class="btn btn-medium lead" type="submit" value="Submit">Login</button></li>
+      <li><a href="/signup">Sign Up Here</a></li>
 
-        <% if !user_exists? %>
-      <h2 class="offset9 lead"> <a href="/new">Create Post!</a></h2>
-      <h2 class="lead offset9"> <a href="/blogpage">Go to see some posts!</a></h2>
+      </form>
       <% else %>
-      <h2 class="lead"> <a href="/new">Create Post!</a></h2>
-      <h2 class="lead"> <a href="/blogpage">Go to see some posts!</a></h2>
-      <% end %>
-        <% if !user_exists? %>
-    <p class="offset9 lead"> <small> <a href="/signup">Sign Up</a>  /  <a href="/login">Log In</a></p></small>
-    <% else %>
-    <p class="offset9 lead"> <small><a href="/logout" onClick="return confirm('Are you sure?')"> Logout</a></<a> Profile Page</a></p></small>
-    <% end %>
+      <li><a href="/logout" onClick="return confirm('Are you sure?')"> Logout</a></li>
+      <li><a href="/blogpage">Go to see some posts!</a></li>
+      <li><a href="/new">Create Post!</a></li>
+      <li><a href="/profile/<%= @user_id %>/edit">Your Profile Page<a></li>
+        <% end %>
+
+    </ul>
+    <form class="navbar-search pull-right" method="get" action="/search">
+    <input class="lead" type="text" name="search" placeholder="Search for TAGS"></input>
+  </form>
+  </div>
+</div>
+
+
+
+
+
+
+
 
   </div>
+  <%= yield %>
 
-<div class="searchbar offset8">
-          <form method="get" action="/search">
-          <input class="lead" type="text" name="search" placeholder="Search for TAGS"></input>
-        </form>
-      </div>
-
-
-    <%= yield %>
-  </div>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/script.js" type="text/javascript"></script>

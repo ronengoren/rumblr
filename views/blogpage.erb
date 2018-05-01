@@ -5,6 +5,8 @@
     <h1 class="lead"> <%= post.title %></h1>
     <br>
     <p id="<%= post.id %>"><%= post.content %></p>
+
+
 <br>
 <% if !user_exists? %>
 <a class="btn btn-primary btn-large" href="/signup">Sign Up</a> OR <a class="btn btn-primary btn-large" href="/login">Log In</a></p></small>
@@ -18,6 +20,8 @@
 <p><% post.tags.each do |tag| %></p>
 <p>TAGS: <%= tag.name %></p>
 <p><% end %></p>
+<p class="lead"><small>Post upload by: <%= post.user.user_name %></small>  </p>
+
   </div>
 
   <% end %>
