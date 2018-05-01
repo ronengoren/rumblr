@@ -4,4 +4,4 @@ development:
 
   production:
   adapter: postgresql
-  host: <%= ENV['postgres://aqstlklduuxofa:98f1875ab41f051225af9c29679398d5c04ade00707ee9ec022a223252f29478@ec2-54-204-46-236.compute-1.amazonaws.com:5432/dan2jmvdkdskai'] %> #This is an env variable that Heroku creates for us. Can be found in your settings config vars
+  host: <%= ENV['postgres://hndevgnkivugeu:567584b5d3ea8005939d9e6dfa6005586951a67a999b166701af2b87056e11c6@ec2-54-83-204-6.compute-1.amazonaws.com:5432/daopchtkk6v9ub'] %> #This is an env variable that Heroku creates for us. Can be found in your settings config vars
